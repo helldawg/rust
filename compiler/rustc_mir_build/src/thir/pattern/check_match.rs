@@ -1280,7 +1280,7 @@ fn report_non_exhaustive_match<'p, 'tcx>(
                     ));
                 } else if ty.inner() == cx.tcx.types.isize {
                     err.note(format!(
-                        "The minimum and maximum values of `{ty}` are not directly accessible, so half-open \
+                        "`{ty}::MIN` and `{ty}::MAX` are not accessible as fixed values, so half-open \
                          ranges are necessary to match exhaustively",
                     ));
                 }
