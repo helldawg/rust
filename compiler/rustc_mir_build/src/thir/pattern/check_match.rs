@@ -1275,14 +1275,13 @@ fn report_non_exhaustive_match<'p, 'tcx>(
             if ty.is_ptr_sized_integral() {
                 if ty.inner() == cx.tcx.types.usize {
                     err.note(format!(
-                        "`{ty}::MAX` is a runtime value and cannot be used for exhaustiveness checking, \
-						so half-open ranges are necessary to match exhaustively",
+                        "`{ty}::MAX` is not accessible as a fixed value, so half-open ranges are \
+                         necessary to match exhaustively",
                     ));
                 } else if ty.inner() == cx.tcx.types.isize {
                     err.note(format!(
-                        "`isize::MIN` and `isize::MAX` are runtime values and cannot \
-						be used for exhaustiveness checking, so half-open ranges are necessary \
-						to match exhaustively",
+                        "The minimum and maximum values of `{ty}` are not directly accessible, so half-open \
+                         ranges are necessary to match exhaustively",
                     ));
                 }
             } else if ty.inner() == cx.tcx.types.str_ {
